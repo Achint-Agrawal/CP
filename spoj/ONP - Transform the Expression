@@ -1,0 +1,39 @@
+#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+using namespace std;
+stack<char> st;
+ 
+void judge(char ch){
+	if(ch=='('){
+		return;
+	}
+	else if(ch=='+' || ch=='-' || ch=='*' || ch=='/' || ch=='^'){
+		st.push(ch);
+	}
+	else if(ch==')'){
+		cout<<st.top();
+		st.pop();
+	}
+	else{
+		cout<<ch;
+	}
+}
+ 
+int main() {
+	int n;
+	cin>>n;
+	char extra;
+	cin>>extra;
+	while(n--){
+		string s;
+		getline(cin, s);
+		int l=s.length();
+		for(int i=0; i<l; i++){
+			char ch=s[i];
+			judge(ch);
+		}
+		cout<<endl;
+	}
+	return 0;
+}
