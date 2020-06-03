@@ -5,10 +5,6 @@
 #define Fo(i, a, b, x) for(int i=a; i<=b; i+=x)
 #define fod(i, n) for(int i=n-1; i>=0; i--)
 #define Fod(i, a, b, x) for(int i=a; i>=b; i-=x)
-#define arrin(a, n) fo(i, n) cin>>a[i]
-#define arrin2(a, n) Fo(i, 1, n, 1) cin>>a[i]
-#define arrout(a, n, s) fo(i, n) cout<<a[i]<<s
-#define arrout2(a, n, s) Fo(i, 1, n, 1) cout<<a[i]<<s
 #define mod 1000000007
 #define PI  3.14159265358979323846
 #define pb push_back
@@ -34,5 +30,35 @@ typedef unsigned long long int  uint64;
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    int n,g,q;
+    cin>>n>>g>>q;
+    int oc[q];
+    int dc[q];
+    fo(i, q){
+        cin>>oc[i];
+    }
+    cin>>q;
+    fo(i, q){
+        cin>>dc[i];
+    }
+    int ans[q]={};
+    fo(i, q){
+        if(oc[i]<g || dc[i]<g)
+            continue;
+        int g2=__gcd(oc[i],dc[i]);
+        if(g2>g){
+            ans[i]=1;
+            continue;
+        }
+        // int reqmul= (int)ceil((1.0*g)/(1.0*g2));
+        int reqmul=g/g2+1;
+        int k=max(oc[i], dc[i]) * reqmul;
+        if(k<=n){
+            ans[i]=1;
+        }
+    }
+    fo(i, q){
+        cout<<ans[i]<<"\n";
+    }
     return 0;
 }

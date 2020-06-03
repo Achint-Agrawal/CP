@@ -5,16 +5,12 @@
 #define Fo(i, a, b, x) for(int i=a; i<=b; i+=x)
 #define fod(i, n) for(int i=n-1; i>=0; i--)
 #define Fod(i, a, b, x) for(int i=a; i>=b; i-=x)
-#define arrin(a, n) fo(i, n) cin>>a[i]
-#define arrin2(a, n) Fo(i, 1, n, 1) cin>>a[i]
-#define arrout(a, n, s) fo(i, n) cout<<a[i]<<s
-#define arrout2(a, n, s) Fo(i, 1, n, 1) cout<<a[i]<<s
 #define mod 1000000007
 #define PI  3.14159265358979323846
 #define pb push_back
 #define deb(a) cout<<#a<<"="<<a<<"\n"
 #define deb2(a,b) cout<<#a<<"="<<a<<"\t"<<#b<<"="<<b<<"\n"
-#define deb3(a,b, c) cout<<#a<<"="<<a<<"\t"<<#b<<"="<<b<<"\t"<<#c<<"="<<c<<"\n"
+#define deb3(a,b,c) cout<<#a<<"="<<a<<"\t"<<#b<<"="<<b<<"\t"<<#c<<"="<<c<<"\n"
 using namespace std;
 
 const double pi=acos(-1.0);
@@ -31,8 +27,31 @@ typedef unsigned long int uint32;
 typedef long long int int64;
 typedef unsigned long long int  uint64;
 
+int numb[1001]={};
+
+int f(int p[], int m, int n){
+    if(n<0)         return -1;
+    if(n==0)        return 0;
+    if(numb[n]!=0)  return numb[n];
+    numb[n]=INT_MAX;
+    fo(i, m){
+        int nu=f(p, m, n-p[i]);
+        if(nu!=-1){
+            numb[n]=min(numb[n], 1+nu);
+        }
+    }
+    if(numb[n]==INT_MAX)   numb[n]=-1;
+    return numb[n];
+}
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    int m,n;
+    cin>>m;
+    int p[m];
+    fo(i, m)    cin>>p[i];
+    cin>>n;
+    cout<<f(p, m, n);
     return 0;
 }

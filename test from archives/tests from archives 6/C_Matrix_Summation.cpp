@@ -5,10 +5,6 @@
 #define Fo(i, a, b, x) for(int i=a; i<=b; i+=x)
 #define fod(i, n) for(int i=n-1; i>=0; i--)
 #define Fod(i, a, b, x) for(int i=a; i>=b; i-=x)
-#define arrin(a, n) fo(i, n) cin>>a[i]
-#define arrin2(a, n) Fo(i, 1, n, 1) cin>>a[i]
-#define arrout(a, n, s) fo(i, n) cout<<a[i]<<s
-#define arrout2(a, n, s) Fo(i, 1, n, 1) cout<<a[i]<<s
 #define mod 1000000007
 #define PI  3.14159265358979323846
 #define pb push_back
@@ -34,5 +30,35 @@ typedef unsigned long long int  uint64;
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    int n,m;
+    cin>>n>>m;
+    int arr[n][m];
+    fo(i, n){
+        fo(j, m){
+            cin>>arr[i][j];
+        }
+    }
+    int ans[n][m]={};
+    fo(i, n){
+        fo(j, m){
+            int a = arr[i][j];
+            if(i-1>=0){
+                a-= arr[i-1][j];
+                if(j-1>=0){
+                    a+= arr[i-1][j-1];
+                }
+            }
+            if(j-1>=0){
+                a-=arr[i][j-1];
+            }
+            ans[i][j]=a;
+        }
+    }
+    fo(i, n){
+        fo(j, m){
+            cout<<ans[i][j]<<" ";
+        }
+        cout<<"\n";
+    }
     return 0;
 }
