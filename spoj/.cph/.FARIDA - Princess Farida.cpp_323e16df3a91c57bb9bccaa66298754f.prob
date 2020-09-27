@@ -1,0 +1,1 @@
+{"group":"local","interactive":false,"local":true,"memoryLimit":1024,"name":"Local: FARIDA - Princess Farida","srcPath":"d:\\Documents\\CP\\spoj\\FARIDA - Princess Farida.cpp","tests":[{"id":1601188068356,"input":"1\n2\n3 2","output":""},{"id":1601188877868,"input":"1\n0","output":""}],"timeLimit":3000,"url":"d:\\Documents\\CP\\spoj\\FARIDA - Princess Farida.cpp"}
