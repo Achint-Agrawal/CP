@@ -39,18 +39,12 @@ int main(){
     while(t--){
         int n;
         cin>>n;
-        vi a(n);
-        arrin(a,n);
-        sort(a.begin(), a.end(), greater<int>());
-        ll ans = 0;
-        for(int i = 0; i<n; i++){
-            if(a[i] % 2 == i%2){
-                ans += (int)pow(-1, i%2) * a[i];
-            }
+        if(n == 1)  cout<<9;
+        else cout<<98;
+        for(int i = 3; i<=n; i++){
+            cout<<(i+6)%10;
         }
-        if(ans > 0) cout<<"Alice"<<endl;
-        else if(ans<0)    cout<<"Bob\n";
-        else    cout<<"Tie\n";
+        cout<<endl;
     }
     return 0;
 }

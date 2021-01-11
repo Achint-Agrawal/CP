@@ -40,17 +40,22 @@ int main(){
         int n;
         cin>>n;
         vi a(n);
-        arrin(a,n);
-        sort(a.begin(), a.end(), greater<int>());
-        ll ans = 0;
-        for(int i = 0; i<n; i++){
-            if(a[i] % 2 == i%2){
-                ans += (int)pow(-1, i%2) * a[i];
+        arrin(a, n);
+        int total = 0, maxcons = 0, currcons = 0;
+        Fo(i, 1, n-2, 1){
+            if((a[i] > a[i-1] && a[i]>a[i+1]) || (a[i]<a[i-1] && a[i]<a[i+1])){
+                total++;
+                currcons++;
+                // cout<<"cu"<<currcons<<endl;
+            }
+            else{
+                maxcons = max(currcons, maxcons);
+                currcons = 0;
             }
         }
-        if(ans > 0) cout<<"Alice"<<endl;
-        else if(ans<0)    cout<<"Bob\n";
-        else    cout<<"Tie\n";
+        maxcons = max(currcons, maxcons);
+        maxcons = min(3, maxcons);
+        cout<<(total-maxcons)<<endl;
     }
     return 0;
 }
