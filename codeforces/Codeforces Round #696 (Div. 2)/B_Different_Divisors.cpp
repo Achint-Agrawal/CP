@@ -31,26 +31,36 @@ typedef unsigned long int uint32;
 typedef long long int int64;
 typedef unsigned long long int  uint64;
 
-void test_case(){
-    int n;
-    cin>>n;
-    vector<pair<int, pii>> people;
-    Fo(i, 1, n, 1){
-        int h, w;
-        cin>>h>>w;
-        people.pb(make_pair(h, make_pair(h, w)));
-        people.pb(make_pair(h, make_pair(w, h)));
-    }
-    
-}
+
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    ll t = 1;
+    int t;
     cin>>t;
+
+    int n = 30000;
+    bool prime[1+n]; 
+    memset(prime, true, sizeof(prime)); 
+  
+    for (int p=2; p*p<=n; p++) 
+    { 
+        
+        if (prime[p] == true) 
+        { 
+            for (int i=p*p; i<=n; i += p) 
+                prime[i] = false; 
+        } 
+    } 
+
     while(t--){
-        test_case();
+        ll d;
+        cin>>d;
+        ll a = 1+d;
+        while(!prime[a])     a++;
+        ll b = a+d;
+        while(!prime[b])     b++;
+        cout<<a*b<<endl;
     }
     return 0;
 }

@@ -31,17 +31,19 @@ typedef unsigned long int uint32;
 typedef long long int int64;
 typedef unsigned long long int  uint64;
 
+bool isPowerOfTwo(ll n)
+{
+   if(n==0)
+   return false;
+ 
+   return (ceil(log2(n)) == floor(log2(n)));
+}
+
 void test_case(){
-    int n;
+    ll n;
     cin>>n;
-    vector<pair<int, pii>> people;
-    Fo(i, 1, n, 1){
-        int h, w;
-        cin>>h>>w;
-        people.pb(make_pair(h, make_pair(h, w)));
-        people.pb(make_pair(h, make_pair(w, h)));
-    }
-    
+    if(isPowerOfTwo(n)) cout<<"NO\n";
+    else cout<<"YES\n";
 }
 
 int main(){

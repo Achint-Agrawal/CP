@@ -31,8 +31,17 @@ typedef unsigned long int uint32;
 typedef long long int int64;
 typedef unsigned long long int  uint64;
 
+void test_case(){
+    
+}
+
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
+    ll t = 1;
+    cin>>t;
+    while(t--){
+        test_case();
+    }
     return 0;
 }

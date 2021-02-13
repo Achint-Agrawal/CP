@@ -31,26 +31,42 @@ typedef unsigned long int uint32;
 typedef long long int int64;
 typedef unsigned long long int  uint64;
 
-void test_case(){
-    int n;
-    cin>>n;
-    vector<pair<int, pii>> people;
-    Fo(i, 1, n, 1){
-        int h, w;
-        cin>>h>>w;
-        people.pb(make_pair(h, make_pair(h, w)));
-        people.pb(make_pair(h, make_pair(w, h)));
+int f(string s1, string s2){
+    int l1 = s1.length(), l2 = s2.length();
+    fo(i, l1/l2){
+        if(s1.substr(i*l2, l2) != s2)   return 0;
     }
-    
+    return 1;
 }
+
+int gcd(int a, int b) 
+{ 
+    if (a == 0)
+        return b; 
+    return gcd(b % a, a); 
+} 
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
-    ll t = 1;
+    int t;
     cin>>t;
     while(t--){
-        test_case();
+        string s1, s2;
+        cin>>s1>>s2;
+        if(s2.length() > s1.length()){
+            string t = s2;
+            s2 = s1;
+            s1 = t;
+        }
+        int l1 = s1.length(), l2 = s2.length();
+        int LCM = (l1 / gcd(l1, l2)) * l2;
+        string slcm = s1;
+        Fo(i, 2, LCM/l1, 1){
+            slcm.append(s1);
+        }
+        if(f(slcm, s2))   cout<<slcm<<endl;
+        else                    cout<<-1<<endl;
     }
     return 0;
 }

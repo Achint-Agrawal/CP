@@ -34,14 +34,10 @@ typedef unsigned long long int  uint64;
 void test_case(){
     int n;
     cin>>n;
-    vector<pair<int, pii>> people;
-    Fo(i, 1, n, 1){
-        int h, w;
-        cin>>h>>w;
-        people.pb(make_pair(h, make_pair(h, w)));
-        people.pb(make_pair(h, make_pair(w, h)));
-    }
-    
+    int b = n%2020;
+    int a = (n - b)/2020 - b;
+    if((a==0 && b>0) || (a>0))  cout<<"YES\n";
+    else                        cout<<"NO\n";
 }
 
 int main(){

@@ -41,21 +41,22 @@ int main(){
         cin>>n;
         vi a(n);
         arrin(a, n);
-        int total = 0, maxcons = 0, currcons = 0;
+        int total = 0, maxchanges = 0, currchanges = 0;
+        vi horv(n, -1);
         Fo(i, 1, n-2, 1){
-            if((a[i] > a[i-1] && a[i]>a[i+1]) || (a[i]<a[i-1] && a[i]<a[i+1])){
-                total++;
-                currcons++;
-                // cout<<"cu"<<currcons<<endl;
+            if(a[i] > a[i-1] && a[i]>a[i+1]){
+                horv[i] = 1;
             }
-            else{
-                maxcons = max(currcons, maxcons);
-                currcons = 0;
+            else if(a[i]<a[i-1] && a[i]<a[i+1]){
+                horv[i] = 0;
             }
         }
-        maxcons = max(currcons, maxcons);
-        maxcons = min(3, maxcons);
-        cout<<(total-maxcons)<<endl;
+        Fo(i, 1, n-2, 1){
+            int temp = a[i];
+            a[i] = a[i-1];
+            int h1 = 
+            currchanges = 
+        }
     }
     return 0;
 }

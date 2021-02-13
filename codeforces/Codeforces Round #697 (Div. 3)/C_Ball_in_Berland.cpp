@@ -32,16 +32,29 @@ typedef long long int int64;
 typedef unsigned long long int  uint64;
 
 void test_case(){
-    int n;
-    cin>>n;
-    vector<pair<int, pii>> people;
-    Fo(i, 1, n, 1){
-        int h, w;
-        cin>>h>>w;
-        people.pb(make_pair(h, make_pair(h, w)));
-        people.pb(make_pair(h, make_pair(w, h)));
+    int a, b, k;
+    cin>>a>>b>>k;
+    vi A(a + 1, 0);
+    vi B(b + 1, 0);
+    vvi V(k , vi(2));
+    fo(i, k){
+        int x;
+        cin>>x;
+        A[x]++;
+        V[i][0] = x;
     }
-    
+    fo(i, k){
+        int x;
+        cin>>x;
+        B[x]++;
+        V[i][1] = x;
+    }
+    ll ans = 0;
+    fo(i, k){
+        ans += k-A[V[i][0]] - B[V[i][1]] + 1;
+    }
+    ans/=2;
+    cout<<ans<<endl;
 }
 
 int main(){
