@@ -31,17 +31,57 @@ typedef unsigned long int uint32;
 typedef long long int int64;
 typedef unsigned long long int  uint64;
 
+struct Person{
+    int id, h, w;
+};
+
+bool operator<(const Person &a, const Person &b) {
+  return tie(a.h, a.w, a.id) < tie(b.h, b.w, b.id);
+}
+
+vi findSmallest(int n, vector<Person> &people){
+    vi ans(n+1, -1);
+    int si = 0, csi = 0;
+    Fo(i, 1, people.size()-1, 1){
+        Person currPerson = people[i];
+        if(currPerson.h != people[csi].h){
+            if(people[si].w > people[csi].w){
+                si = csi;
+            }
+            csi = i;
+        }
+        if(people[si].w < currPerson.w && people[si].h < currPerson.h){
+            ans[currPerson.id] = people[si].id;
+        }
+        // cout<<i<<" "<<csi<<" "<<si<<endl;
+    }
+    return ans;
+}
+
 void test_case(){
     int n;
     cin>>n;
-    vector<pair<int, pii>> people;
+    vector<Person> people;
     Fo(i, 1, n, 1){
+        Person curr;
         int h, w;
         cin>>h>>w;
-        people.pb(make_pair(h, make_pair(h, w)));
-        people.pb(make_pair(h, make_pair(w, h)));
+        curr = {i, h, w};
+        people.push_back(curr);
+        curr = {i, w, h};
+        people.push_back(curr);
     }
-    
+    sort(people.begin(), people.end());
+    int ind = 0;
+    // for(auto i:people){
+    //     cout<<ind++<<" "<<i.id<<" "<<i.h<<" "<<i.w<<endl;
+    // }
+    // cout<<endl;
+
+    // Find person with smallest w till current index
+    vi ans = findSmallest(n, people);
+    arrout2(ans, n, ' ');
+    cout<<endl;
 }
 
 int main(){
