@@ -1,6 +1,5 @@
 #include <bits/stdc++.h>
 
-#define ll long long
 #define fo(i, n) for(int i=0; i<n; i++)
 #define Fo(i, a, b, x) for(int i=a; i<=b; i+=x)
 #define arrin(a, n) fo(i, n) cin>>a[i]
@@ -24,6 +23,7 @@ typedef vector<vi> vvi;
 typedef map<int,int> mii;
 typedef set<int> si;
 typedef multiset<int> msi;
+typedef long long ll;
 
 void test_case(){
     
