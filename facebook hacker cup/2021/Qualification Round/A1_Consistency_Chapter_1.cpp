@@ -1,26 +1,4 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <sstream>
-#include <queue>
-#include <deque>
-#include <bitset>
-#include <iterator>
-#include <list>
-#include <stack>
-#include <map>
-#include <set>
-#include <functional>
-#include <numeric>
-#include <utility>
-#include <limits>
-#include <time.h>
-#include <math.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <assert.h>
+#include <bits/stdc++.h>
 
 #define fo(i, n) for(int i=0; i<n; i++)
 #define Fo(i, a, b, x) for(int i=a; i<=b; i+=x)
@@ -47,8 +25,43 @@ typedef set<int> si;
 typedef multiset<int> msi;
 typedef long long ll;
 
-void test_case(){
-    
+bool isVowel(char c){
+    if(c=='A' || c=='E' || c=='I' || c=='O' || c=='U'){
+        return true;
+    }
+    return false;
+}
+
+int test_case(){
+    string s;
+    cin>>s;
+    int l = s.size();
+    vi freq(26, 0);
+    int nVowels = 0, nConsonants = 0;
+    for(int i = 0; i<l; i++){
+        int ind = s[i] - 'A';
+        freq[ind]++;
+        if(isVowel(s[i])){
+            nVowels++;
+        }
+        else{
+            nConsonants++;
+        }
+    }
+
+    int ans = INT_MAX;
+    for(int i = 0; i<26; i++){
+        int changes = 0;
+        char ch = (char)(i + 'A');
+        if(isVowel(ch)){
+            changes = 2*(nVowels - freq[i]) + nConsonants;
+        }
+        else{
+            changes = 2*(nConsonants-freq[i]) + nVowels;
+        }
+        ans = min(ans, changes);
+    }
+    return ans;
 }
 
 int main(){
@@ -56,8 +69,8 @@ int main(){
     cin.tie(NULL);
     ll t = 1;
     cin>>t;
-    while(t--){
-        test_case();
+    fo(i, t){
+        cout<<"Case #"<<(i+1)<<": "<<test_case()<<endl;
     }
     return 0;
 }

@@ -48,14 +48,39 @@ typedef multiset<int> msi;
 typedef long long ll;
 
 void test_case(){
-    
+    int n, l, r, x;
+    cin>>n>>l>>r>>x;
+    vi c(n);
+    arrin(c, n);
+    sort(c.begin(), c.end());
+
+    int n_ways = 0;
+    for(int mask = 0; mask < (1<<n); mask++){
+        int min_d = -1, max_d = -1, n_probs = 0, tot_d = 0;
+        fo(j, n){
+            if((mask>>j) & 1){
+                n_probs++;
+                if(min_d == -1){
+                    min_d = c[j];
+                }
+                max_d = c[j];
+                tot_d += c[j];
+            }
+        }
+        // deb3(mask, n_probs, tot_d);
+        // deb2(min_d, max_d);
+        if(n_probs>=2 && (max_d-min_d)>=x && tot_d<=r && tot_d>=l){
+            n_ways++;
+        }
+    }
+    cout<<n_ways;
 }
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     ll t = 1;
-    cin>>t;
+    // cin>>t;
     while(t--){
         test_case();
     }

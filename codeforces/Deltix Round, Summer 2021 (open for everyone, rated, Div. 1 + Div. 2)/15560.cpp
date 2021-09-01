@@ -1,26 +1,4 @@
-#include <iostream>
-#include <string>
-#include <vector>
-#include <algorithm>
-#include <sstream>
-#include <queue>
-#include <deque>
-#include <bitset>
-#include <iterator>
-#include <list>
-#include <stack>
-#include <map>
-#include <set>
-#include <functional>
-#include <numeric>
-#include <utility>
-#include <limits>
-#include <time.h>
-#include <math.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <assert.h>
+#include <bits/stdc++.h>
 
 #define fo(i, n) for(int i=0; i<n; i++)
 #define Fo(i, a, b, x) for(int i=a; i<=b; i+=x)
@@ -47,8 +25,21 @@ typedef set<int> si;
 typedef multiset<int> msi;
 typedef long long ll;
 
-void test_case(){
-    
+int test_case(){
+    int a,b;
+    cin>>a>>b;
+    if(a == 0 && b == 0){
+        return 0;
+    }
+    else if(a == b){
+        return 1;
+    }
+    else if((a+b) %2 == 0){
+        return 2;
+    }
+    else{
+        return -1;
+    }
 }
 
 int main(){
@@ -57,7 +48,7 @@ int main(){
     ll t = 1;
     cin>>t;
     while(t--){
-        test_case();
+        cout<<test_case()<<endl;
     }
     return 0;
 }

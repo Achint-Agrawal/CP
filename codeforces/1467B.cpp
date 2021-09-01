@@ -1,4 +1,26 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <string>
+#include <vector>
+#include <algorithm>
+#include <sstream>
+#include <queue>
+#include <deque>
+#include <bitset>
+#include <iterator>
+#include <list>
+#include <stack>
+#include <map>
+#include <set>
+#include <functional>
+#include <numeric>
+#include <utility>
+#include <limits>
+#include <time.h>
+#include <math.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <assert.h>
 
 #define fo(i, n) for(int i=0; i<n; i++)
 #define Fo(i, a, b, x) for(int i=a; i<=b; i+=x)
@@ -25,62 +47,45 @@ typedef set<int> si;
 typedef multiset<int> msi;
 typedef long long ll;
 
-vi findhorv(vi &a, int n){
-    vi horv(n, 0);
-    if(a[0] > a[1]){
-        horv[0] = 1;
+bool isIntimidating(vi &A, int ind, int n){
+    if(ind>n-2 || ind<1){
+        return false;
     }
-    else if(a[0] < a[1]){
-        horv[0] = -1;
+    if((A[ind] < A[ind+1] && A[ind] < A[ind-1])
+    || (A[ind] > A[ind+1] && A[ind] > A[ind-1])){
+        return true;
     }
-
-    if(a[n-1] > a[n-2]){
-        horv[n-1] = 1;
-    }
-    else if(a[n-1] < a[n-2]){
-        horv[n-1] = -1;
-    }
-
-    Fo(i, 1, n-2, 1){
-        if(a[i] > a[i-1] && a[i] > a[i+1]){
-            horv[i] = 1;
-        }
-        else if(a[i] < a[i-1] && a[i] < a[i+1]){
-            horv[i] = -1;
-        }
-    }
-    return horv;
-}
-
-int find_intimidation(vi &horv, int n){
-    int ans = 0;
-    fo(i, n){
-        ans+= abs(horv[i]);
-    }
-    return ans;
-}
-
-int max_reduction(vi &a, vi &horv, int n){
-    int ans = 0;
-    fo(i, n){
-        int init = 0;
-        int ai = max(0, i-1), bi = min(n-1, i+1)
-        Fo(i, ai, bi, 1){
-            init += abs(horv[i]);
-        }
-        vi sub(a.begin() + ai, a.begin() + bi+1);
-        
-    }
+    return false;
 }
 
 void test_case(){
     int n;
     cin>>n;
-    vi a(n);
-    arrin(a, n);
-    vi horv = findhorv(a, n);      //hill or valley
-    int intimidation = find_intimidation(horv, n);
-    cout<<(intimidation - max_reduction(a, horv, n))<<endl;
+    vi A(n);
+    arrin(A, n);
+    
+    int intimidation = 0;
+    Fo(i, 1, n-1, 1){
+        if(isIntimidating(A, i, n)){
+            intimidation++;
+        }
+    }
+
+    // deb(intimidation);
+    int max_dec = 0;
+    Fo(i, 1, n-1, 1){
+        int temp = A[i];
+        int initial_intimidation = isIntimidating(A, i, n) + isIntimidating(A, i-1, n) + isIntimidating(A, i+1, n);
+        A[i] = A[i-1];
+        int intimidation1 = isIntimidating(A, i, n) + isIntimidating(A, i-1, n) + isIntimidating(A, i+1, n);
+        A[i] = A[i+1];
+        int intimidation2 = isIntimidating(A, i, n) + isIntimidating(A, i-1, n) + isIntimidating(A, i+1, n);
+        A[i] = temp;
+        max_dec = max(max_dec, initial_intimidation - min(intimidation1, intimidation2));
+        // deb3(i, intimidation1, intimidation2);
+    }
+
+    cout<<(intimidation - max_dec)<<"\n";
 }
 
 int main(){

@@ -48,14 +48,33 @@ typedef multiset<int> msi;
 typedef long long ll;
 
 void test_case(){
-    
+    int n;
+    cin>>n;
+    vi A(n);
+    arrin(A, n);
+    for(int mask = 0; mask<(1<<n); mask++){
+        int sum = 0;
+        fo(j, n){
+            if((mask>>j)&1){
+                sum += A[j];
+            }
+            else{
+                sum -= A[j];
+            }
+        }
+        if(sum % 360 == 0){
+            cout<<"YES\n";
+            return;
+        }
+    }
+    cout<<"NO\n";
 }
 
 int main(){
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     ll t = 1;
-    cin>>t;
+    // cin>>t;
     while(t--){
         test_case();
     }
