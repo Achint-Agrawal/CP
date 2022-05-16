@@ -50,7 +50,41 @@ typedef set<int> si;
 typedef multiset<int> msi;
 typedef long long ll;
 
-void test_case() {}
+int findTopMost(vector<string> &V, int n, int m) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            if (V[i][j] == 'R') {
+                return i;
+            }
+        }
+    }
+    return -1;
+}
+
+int findLeftMost(vector<string> &V, int n, int m) {
+    for (int j = 0; j < m; j++) {
+        for (int i = 0; i < n; i++) {
+            if (V[i][j] == 'R') {
+                return j;
+            }
+        }
+    }
+    return -1;
+}
+
+void test_case() {
+    int n, m;
+    cin >> n >> m;
+    vector<string> V(n, "");
+    fo(i, n) { cin >> V[i]; }
+    int leftMost = findLeftMost(V, n, m);
+    int topMost = findTopMost(V, n, m);
+    if (V[topMost][leftMost] == 'R') {
+        cout << "YES\n";
+    } else {
+        cout << "NO\n";
+    }
+}
 
 int main() {
     ios_base::sync_with_stdio(false);
